@@ -79,6 +79,18 @@ class PicsToolApp(TkinterDnD.Tk):
         self.out_entry.pack(side="left", padx=6)
         tk.Button(out_frame, text="参照...", font=("Meiryo", 9), command=self.select_output_dir).pack(side="left", padx=6)
 
+        self.status = tk.Label(
+            self, text="準備完了 - 画像ファイルをドラッグしてください", fg="gray", font=("Meiryo", 9)
+        )
+        self.status.pack(side="bottom", pady=10)
+
+        btn_frame = tk.Frame(self)
+        btn_frame.pack(side="bottom", pady=12, padx=20, fill="x")
+        tk.Button(btn_frame, text="変換開始", width=16, height=2, bg="#4CAF50", fg="white",
+                  font=("Meiryo", 10, "bold"), command=self.start_convert).pack(side="left", padx=10)
+        tk.Button(btn_frame, text="リストをクリア", width=16, height=2,
+                  font=("Meiryo", 10), command=self.clear_list).pack(side="left", padx=10)
+
         list_frame = tk.Frame(self)
         list_frame.pack(pady=5, padx=20, fill="both", expand=True)
         tk.Label(list_frame, text="追加された画像ファイル：", font=("Meiryo", 10)).pack(anchor="w")
@@ -88,18 +100,6 @@ class PicsToolApp(TkinterDnD.Tk):
         self.listbox.configure(yscrollcommand=scrollbar.set)
         self.listbox.pack(side="left", fill="both", expand=True)
         scrollbar.pack(side="right", fill="y")
-
-        btn_frame = tk.Frame(self)
-        btn_frame.pack(pady=12, padx=20, fill="x")
-        tk.Button(btn_frame, text="変換開始", width=16, height=2, bg="#4CAF50", fg="white",
-                  font=("Meiryo", 10, "bold"), command=self.start_convert).pack(side="left", padx=10)
-        tk.Button(btn_frame, text="リストをクリア", width=16, height=2,
-                  font=("Meiryo", 10), command=self.clear_list).pack(side="left", padx=10)
-
-        self.status = tk.Label(
-            self, text="準備完了 - 画像ファイルをドラッグしてください", fg="gray", font=("Meiryo", 9)
-        )
-        self.status.pack(side="bottom", pady=10)
 
     def _is_supported(self, path):
         return os.path.splitext(path)[1].lower() in SUPPORTED_EXTS
