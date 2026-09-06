@@ -1,0 +1,54 @@
+picstool 開発手順書
+
+1. 依存関係のインストール（初回のみ）
+コマンドプロンプトで以下を実行：
+pip install -r requirements.txt
+
+（PowerShellで実行がブロックされる場合は、代わりに以下のコマンドを使用：
+python -m pip install -r requirements.txt ）
+
+requirements.txt に含まれる依存パッケージ：
+- Pillow（画像の読み込み・リサイズ・形式変換に使用）
+- tkinterdnd2（ドラッグ＆ドロップ機能に使用）
+
+2. ソースコード構成
+picstool/
+├── src/
+│   └── picstool/
+│       ├── __init__.py      … パッケージ化のための空ファイル
+│       └── picstool.py      … 本体プログラム（GUI・変換処理）
+├── picstool.spec             … PyInstaller用のビルド設定ファイル
+├── requirements.txt
+└── .gitignore
+
+3. プログラムの実行方法（開発時）
+プロジェクトのpicstoolディレクトリで以下を実行：
+python src\picstool\picstool.py
+
+操作手順：
+(1) ウィンドウ上部の水色エリアに画像ファイルまたはフォルダをドラッグ＆ドロップする
+    ※「画像ファイルを選択」「フォルダを選択」ボタンからの選択も可能
+    ※対応拡張子（jpg / jpeg / png / gif / bmp）以外のファイルは自動的に無視される
+(2) 「変換設定」欄で以下を設定する
+    - 出力形式（JPG / PNG / GIF / BMP）
+    - 圧縮率（1～99の整数、元のサイズに対する割合）
+    - 出力フォルダ（「参照...」ボタンで選択、必須）
+(3) 「変換開始」ボタンをクリックすると、一覧の画像が指定フォルダに一括変換・出力される
+
+4. 独立したexeファイルへのパッケージ化（任意、Pythonがない環境でも実行可能にする）
+(1) pyinstallerのインストール：
+pip install pyinstaller
+（PowerShellでブロックされる場合：python -m pip install pyinstaller ）
+
+(2) pyinstallerでビルド：
+picstool.spec を使ってビルドする場合（推奨、設定済みのアイコン・オプションが反映される）：
+pyinstaller picstool.spec
+
+spec を使わず直接指定する場合：
+pyinstaller --onefile --windowed --icon=app.ico src/picstool/picstool.py
+
+生成された実行ファイルは dist\picstool.exe に出力される。
+
+5. 生成物の扱いについて
+build/ と dist/ フォルダはビルド時に自動生成される一時ファイル・実行ファイルであり、
+.gitignore に設定済みのため Git の管理対象には含めない。
