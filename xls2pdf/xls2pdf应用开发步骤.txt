@@ -5,10 +5,11 @@ xls2pdf应用开发步骤
 pip install pywin32 tkinterdnd2
 （power shell可能会禁止上述命令直接运行，此时改用如下命令： python -m pip install pywin32 tkinterdnd2）
 
-2. 完整代码（保存为 excel_to_pdf_a3.py）
+2. 本地验证
+python src\xls2pdf\xls2pdf.py
 
 3. 使用方法
-双击运行 excel_to_pdf_a3.py（或打包成 exe）。
+双击运行 xls2pdf.py（或打包成 exe）。
 把 Excel 文件从资源管理器直接拖到窗口蓝色区域。
 点击“开始转换”即可。
 
@@ -19,7 +20,7 @@ pip install pyinstaller
 
 （2）用pyinstaller打包：
 使用指定图标打包：
-pyinstaller --onefile --windowed --icon=app.ico xls2pdf.py
+pyinstaller --onefile --windowed --icon=app.ico src/xls2pdf/xls2pdf.py
 
 使用默认图标打包：
-pyinstaller --onefile --windowed  xls2pdf.py
+pyinstaller --onefile --windowed  src/xls2pdf/xls2pdf.py

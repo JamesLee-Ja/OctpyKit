@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['xls2pdf.py'],
+    ['src/xls2pdf/xls2pdf.py'],
     pathex=[],
     binaries=[],
     datas=[],
