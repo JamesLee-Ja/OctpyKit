@@ -1,2 +1,4 @@
 pypdf
 tkinterdnd2
+reportlab
+
